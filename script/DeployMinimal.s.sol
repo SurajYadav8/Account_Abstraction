@@ -7,12 +7,12 @@ import {MinimalAccount} from "../src/Ethereum/MinimalAccount.sol";
 import {HelperConfig} from "./HelperConfig.s.sol";
 
 
-contract DeployMinimalAccount is Script {
+contract DeployMinimal is Script {
     function run() public {
 
     }
 
-    function deployMinimalAccount() public returns(HelperConfig memory, MinimalAccount){
+    function deployMinimalAccount() public returns(HelperConfig, MinimalAccount){
         HelperConfig helperConfig = new HelperConfig();
         HelperConfig.NetworkConfig memory config = helperConfig.getConfig();
 
