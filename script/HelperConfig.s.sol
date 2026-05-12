@@ -2,7 +2,8 @@
 
 pragma solidity ^0.8.28;
 
-import {Script} from "forge-std/Script.sol";
+import {Script, console2} from "forge-std/Script.sol";
+import { EntryPoint } from "lib/account-abstraction/contracts/core/EntryPoint.sol";
 
 contract HelperConfig is Script {
    error HelperConfig_InvalidChainId();
@@ -61,8 +62,12 @@ contract HelperConfig is Script {
         return localNetworkConfig;
     }
     
+    console2.log("Deploying mocks....");
+    vm.startBroadcast(FOUNDRY_DEFAULT_WALLET);
+    EntryPoint entryPoint = new EntryPoint();
+    vm.stopBroadcast();
 
-    return NetworkConfig({entryPoint: address(0), account: FOUNDRY_DEFAULT_WALLET});
+    return NetworkConfig({entryPoint: address(entryPoint), account: FOUNDRY_DEFAULT_WALLET});
 
     // other wise we have to deploy a mock entry point contract...
 
